@@ -17,13 +17,17 @@ public class Main {
 
 	public static void main(String[] args) {
 		ExecutorService cached = Executors.newCachedThreadPool();
-		cached.execute(new Runnable() {
-			Long l = 0L;
-			public void run() {
-				log.info(l);
-				l++;
-			}
-		});
+		for (int i = 0; i < 10; i++) {
+			cached.execute(new Runnable() {
+				public void run() {
+					Long l = 0L;
+					while (true) {
+						log.info(l);
+						l++;
+					}
+				}
+			});
+		}
 	}
 
 }
